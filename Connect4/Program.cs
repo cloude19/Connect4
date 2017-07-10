@@ -12,7 +12,7 @@ namespace Connect4
         {
             Console.WriteLine("Hello World!");
             Console.WriteLine("A Change");
-            int change2 = 0;
+            
         }
         public static string Name{get{ return name; }
             set {
