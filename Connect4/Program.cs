@@ -15,8 +15,16 @@ namespace Connect4
             Name = ReadLine();
             Console.Write("Enter 1-4 for diffculty: ");
             Debth = ReadLine();
+            //Create and intilized board
+            Board Game = new Board(6, 6);
 
-           
+            //Test Display and Add token funciton
+            Game.DisplayGird();
+            Game.AddToken(3);
+            Game.DisplayGird();
+
+
+
         }
         public static string Name{get{ return name; }
             set {
