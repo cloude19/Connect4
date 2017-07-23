@@ -35,24 +35,22 @@ namespace Connect4
         }
 
         //start at the bottom of row value for Column and work way up till * is found else no space
-        public void AddToken(int Column)
+        public Tuple<int, int, bool> AddToken(int Column)
         {
-            bool Legal = false;
-            for(int row = this.Gridd.GetLength(1) - 1; row >= 0; row--)
+            for(int row = this.Gridd.GetLength(0) - 1; row >= 0; row--)
             {
                 //need to add condition for AI
                 if(this.Gridd[row, Column] == '*')
                 {
                     this.Gridd[row, Column] = 'P';
-                    Legal = true;
-                    break;
+                    return Tuple.Create(row, Column, true);
+                    //break;
                 }
             }
-            if(Legal == false)
-            {
-                Console.WriteLine("This pace is full Please choose another");
-            }
+                //Console.WriteLine("This pace is full Please choose another");
+                return Tuple.Create(0, 0, false);
         }
+
         public void DisplayGird()
         {
             for(int x = 0; x < this.Gridd.GetLength(0); x++)
@@ -64,16 +62,195 @@ namespace Connect4
                 Console.WriteLine(" ");
             }
         }
-        public int SearchPoints(int row, int column, char focus)
+        public int SearchPoints(Tuple<int, int, bool> Board, char focus)
         {
-            int points = 0;
-            //Try to check diagonals if it exeist in memory
+            int pointsFinal = 0;
+            int pointsRD = 0;
+            int pointsLD = 0;
+            int pointsVertical = 0;
+            int pointsHorizontal = 0;
+
+            //Try to check diagonals if it exist in memory
+
+            //Check Right Diagonal 
+            //Left downward
+            if (Board.Item1 != this.Gridd.GetLength(0) - 1) {
+                try {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 + 1, Board.Item2 - 1] == focus)
+                        {
+                            pointsRD++;
+                        }
+                        else
+                            break;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Diagonals left downward reached end");
+                }
+            }
+            //Right upward
+            if (Board.Item2 != this.Gridd.GetLength(1) - 1)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 - 1, Board.Item2 + 1] == focus)
+                        {
+                            pointsRD++;
+                        }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Diagonals Right upward reached end");
+                }
+            }
+            if (pointsFinal < pointsRD)
+                pointsFinal = pointsRD;
+
+            //Check Left Diagonal 
+            //Right Downward
+            if (Board.Item1 != this.Gridd.GetLength(0) - 1)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 + 1, Board.Item2 + 1] == focus)
+                        {
+                            pointsLD++;
+                        }
+                        else
+                            break;
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Diagonals left downward reached end");
+                }
+            }
+
+            //Left Upward
+            if (Board.Item2 != 0)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 - 1, Board.Item2 - 1] == focus)
+                        {
+                            pointsLD++;
+                        }
+                        else
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Diagonals left Upward reached end");
+                }
+            }
+            if (pointsFinal < pointsLD)
+                pointsFinal = pointsLD;
 
             //Try to check vertical if it exist in memory
+            //Check up
+            if (Board.Item1 != 0)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 + 1, Board.Item2] == focus)
+                        {
+                            pointsVertical++;
+                        }
+                        else
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Vertical up reached end");
+                }
+            }
 
-            //Try to check horizontals if it exist in memory
+            //Check Down
+            if (Board.Item1 != this.Gridd.GetLength(0) - 1)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1 - 1, Board.Item2] == focus)
+                        {
+                            pointsVertical++;
+                        }
+                        else
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Vertical Down reached end");
+                }
+            }
+            if (pointsFinal < pointsVertical)
+                pointsFinal = pointsVertical;
 
-            return points;
+            //Try to check horizontals if it exist in 
+            //Check Horizontal left
+            if (Board.Item2 != 0)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1, Board.Item2 - 1] == focus)
+                        {
+                            pointsHorizontal++;
+                        }
+                        else
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Horizontal Left reached end");
+                }
+            }
+
+            //Check Horizontal Right 
+            if (Board.Item2 != this.Gridd.GetLength(1) - 1)
+            {
+                try
+                {
+                    for (int step = 0; step < 4; step++)
+                    {
+                        if (this.Gridd[Board.Item1, Board.Item2 + 1] == focus)
+                        {
+                            pointsHorizontal++;
+                        }
+                        else
+                            break;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Horizontal Left reached end");
+                }
+            }
+            if (pointsFinal < pointsHorizontal)
+                pointsFinal = pointsHorizontal;
+
+            return pointsFinal;
         }
         
     }

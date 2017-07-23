@@ -20,10 +20,18 @@ namespace Connect4
 
             //Test Display and Add token funciton
             Game.DisplayGird();
-            Game.AddToken(3);
+           Game.AddToken(3);
             Game.DisplayGird();
 
-
+            //get grid locations for future refernce
+         
+            Console.WriteLine(Game.AddToken(3));
+            Console.WriteLine(Game.AddToken(2));
+            Console.WriteLine(Game.AddToken(1));
+            Console.WriteLine(Game.AddToken(1));
+            Console.WriteLine();
+            Game.DisplayGird();
+            
 
         }
         public static string Name{get{ return name; }
