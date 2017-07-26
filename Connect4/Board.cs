@@ -13,8 +13,9 @@ namespace Connect4
         private char[,] Gridd;
 
       public Board(){
+            Gridd = new char[5, 5];
             for (int Rowlimit = 0; Rowlimit < 5; Rowlimit++)
-            {
+            {               
                 for (int ColumnLimit = 0; ColumnLimit < 5; ColumnLimit++)
                 {
                     this.Gridd[Rowlimit, ColumnLimit] = '*';
@@ -76,9 +77,9 @@ namespace Connect4
             //Left downward
             if (Board.Item1 != this.Gridd.GetLength(0) - 1) {
                 try {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 + 1, Board.Item2 - 1] == focus)
+                        if (this.Gridd[Board.Item1 + step, Board.Item2 - step] == focus)
                         {
                             pointsRD++;
                         }
@@ -97,9 +98,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 - 1, Board.Item2 + 1] == focus)
+                        if (this.Gridd[Board.Item1 - step, Board.Item2 + step] == focus)
                         {
                             pointsRD++;
                         }
@@ -120,9 +121,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 + 1, Board.Item2 + 1] == focus)
+                        if (this.Gridd[Board.Item1 + step, Board.Item2 + step] == focus)
                         {
                             pointsLD++;
                         }
@@ -142,9 +143,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 - 1, Board.Item2 - 1] == focus)
+                        if (this.Gridd[Board.Item1 - step, Board.Item2 - step] == focus)
                         {
                             pointsLD++;
                         }
@@ -166,9 +167,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 + 1, Board.Item2] == focus)
+                        if (this.Gridd[Board.Item1 - step, Board.Item2] == focus)
                         {
                             pointsVertical++;
                         }
@@ -187,9 +188,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1 - 1, Board.Item2] == focus)
+                        if (this.Gridd[Board.Item1 + step, Board.Item2] == focus)
                         {
                             pointsVertical++;
                         }
@@ -211,9 +212,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1, Board.Item2 - 1] == focus)
+                        if (this.Gridd[Board.Item1, Board.Item2 - step] == focus)
                         {
                             pointsHorizontal++;
                         }
@@ -232,9 +233,9 @@ namespace Connect4
             {
                 try
                 {
-                    for (int step = 0; step < 4; step++)
+                    for (int step = 1; step < 5; step++)
                     {
-                        if (this.Gridd[Board.Item1, Board.Item2 + 1] == focus)
+                        if (this.Gridd[Board.Item1, Board.Item2 + step] == focus)
                         {
                             pointsHorizontal++;
                         }
@@ -250,7 +251,7 @@ namespace Connect4
             if (pointsFinal < pointsHorizontal)
                 pointsFinal = pointsHorizontal;
 
-            return pointsFinal;
+            return pointsFinal + 1;
         }
         
     }

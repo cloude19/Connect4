@@ -10,6 +10,11 @@ namespace Connect4
 
         static void Main(string[] args)
         {
+            //Run the Test Function?
+            Console.Write("Would you like to run the Test function?: Enter Y or N");
+            if (Console.ReadLine() == "Y")
+                Testing();
+
             //get users name and diffculty
             Console.Write("Enter your Name: ");
             Name = ReadLine();
@@ -17,20 +22,6 @@ namespace Connect4
             Debth = ReadLine();
             //Create and intilized board
             Board Game = new Board(6, 6);
-
-            //Test Display and Add token funciton
-            Game.DisplayGird();
-           Game.AddToken(3);
-            Game.DisplayGird();
-
-            //get grid locations for future refernce
-         
-            Console.WriteLine(Game.AddToken(3));
-            Console.WriteLine(Game.AddToken(2));
-            Console.WriteLine(Game.AddToken(1));
-            Console.WriteLine(Game.AddToken(1));
-            Console.WriteLine();
-            Game.DisplayGird();
             
 
         }
@@ -77,11 +68,58 @@ namespace Connect4
                     }
                     else
                     {
-                        WriteLine("Please enter a number value between 1-4");
+                        WriteLine("Please enter a number between 1-4");
                         value = ReadLine();
                     }
 
                 }
+            }
+        }
+
+        public static void Testing()
+        {
+            //function used to test various actions
+            Console.WriteLine("Test Display function(A)\nTest add token function(B)\n" +
+                "Test Search Points function(C)\n");
+            Console.Write("Please Enter option: ");
+            string toTest = ReadLine();
+            Board Game = new Board();
+
+            switch (toTest)
+            {
+                case "A":
+                    //Test Display and Add token funciton
+                    Game.DisplayGird();
+                    Game.AddToken(3);
+                    Game.DisplayGird();
+                    break;
+                case "B":
+                    //Test add token function
+                    Game.AddToken(3);
+                    Game.AddToken(2);
+                    Game.AddToken(1);
+                    Game.AddToken(1);
+                    Game.DisplayGird();
+                    break;
+                case "C":
+                    //Test Search Points Functuion
+                    Game.AddToken(1);
+                    Game.AddToken(1);
+                    Game.AddToken(1);
+                    Game.AddToken(1);
+                    Game.AddToken(2);
+                    Game.AddToken(2);
+                    Game.AddToken(2);
+                    Game.AddToken(3);
+                    Game.AddToken(3);
+                    Console.WriteLine(Game.SearchPoints(Game.AddToken(4), 'P'));
+                    Game.DisplayGird();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Test Command");
+                    break;
+
+
             }
         }
     }
