@@ -11,7 +11,7 @@ namespace Connect4
     class Board
     {
         private char[,] Gridd;
-
+    
       public Board(){
             Gridd = new char[5, 5];
             for (int Rowlimit = 0; Rowlimit < 5; Rowlimit++)
@@ -36,14 +36,17 @@ namespace Connect4
         }
 
         //start at the bottom of row value for Column and work way up till * is found else no space
-        public Tuple<int, int, bool> AddToken(int Column)
+        public Tuple<int, int, bool> AddToken(int Column, bool AI)
         {
             for(int row = this.Gridd.GetLength(0) - 1; row >= 0; row--)
             {
                 //need to add condition for AI
                 if(this.Gridd[row, Column] == '*')
                 {
-                    this.Gridd[row, Column] = 'P';
+                    if(AI == false)
+                        this.Gridd[row, Column] = 'P';
+                    else
+                        this.Gridd[row, Column] = 'A';
                     return Tuple.Create(row, Column, true);
                     //break;
                 }
@@ -63,6 +66,14 @@ namespace Connect4
                 Console.WriteLine(" ");
             }
         }
+
+        //copy grid from another grid
+        public void CopyBoard(Board CopyTo, Board ToCopy)
+        {
+            CopyTo.Gridd = ToCopy.Gridd;
+        }
+
+        //searh a token based off it's location and return how good that token is
         public int SearchPoints(Tuple<int, int, bool> Board, char focus)
         {
             int pointsFinal = 0;

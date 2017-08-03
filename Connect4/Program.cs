@@ -1,13 +1,15 @@
 ﻿using System;
 using static System.Console;
+using System.Collections.Generic;
+
 
 namespace Connect4
 {
     class Program
-    {
+    { 
         private static string name;
         private static string debth;
-
+        
         static void Main(string[] args)
         {
             //Run the Test Function?
@@ -22,6 +24,11 @@ namespace Connect4
             Debth = ReadLine();
             //Create and intilized board
             Board Game = new Board(6, 6);
+
+            //test Dictonary
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            
+            
             
 
         }
@@ -90,29 +97,29 @@ namespace Connect4
                 case "A":
                     //Test Display and Add token funciton
                     Game.DisplayGird();
-                    Game.AddToken(3);
+                    Game.AddToken(3,false);
                     Game.DisplayGird();
                     break;
                 case "B":
                     //Test add token function
-                    Game.AddToken(3);
-                    Game.AddToken(2);
-                    Game.AddToken(1);
-                    Game.AddToken(1);
+                    Game.AddToken(3, false);
+                    Game.AddToken(2, false);
+                    Game.AddToken(1, false);
+                    Game.AddToken(1, false);
                     Game.DisplayGird();
                     break;
                 case "C":
                     //Test Search Points Functuion
-                    Game.AddToken(1);
-                    Game.AddToken(1);
-                    Game.AddToken(1);
-                    Game.AddToken(1);
-                    Game.AddToken(2);
-                    Game.AddToken(2);
-                    Game.AddToken(2);
-                    Game.AddToken(3);
-                    Game.AddToken(3);
-                    Console.WriteLine(Game.SearchPoints(Game.AddToken(4), 'P'));
+                    Game.AddToken(1, false);
+                    Game.AddToken(1, false);
+                    Game.AddToken(1, false);
+                    Game.AddToken(1, false);
+                    Game.AddToken(2, false);
+                    Game.AddToken(2, false);
+                    Game.AddToken(2, true);
+                    Game.AddToken(3, false);
+                    Game.AddToken(3, true);
+                    Console.WriteLine(Game.SearchPoints(Game.AddToken(4, false), 'P'));
                     Game.DisplayGird();
                     break;
                 default:
