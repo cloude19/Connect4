@@ -8,7 +8,7 @@ namespace Connect4
      * Search selected points[], get grid state[just copy int temp gridd], display grid
      * note: replace x with row and y with column [done]
      */
-    class Board
+   public class Board
     {
         private char[,] Gridd;
     
@@ -36,17 +36,17 @@ namespace Connect4
         }
 
         //start at the bottom of row value for Column and work way up till * is found else no space
-        public Tuple<int, int, bool> AddToken(int Column, bool AI)
+        static public Tuple<int, int, bool> AddToken(Board Target, int Column, bool AI)
         {
-            for(int row = this.Gridd.GetLength(0) - 1; row >= 0; row--)
+            for(int row = Target.Gridd.GetLength(0) - 1; row >= 0; row--)
             {
                 //need to add condition for AI
-                if(this.Gridd[row, Column] == '*')
+                if(Target.Gridd[row, Column] == '*')
                 {
                     if(AI == false)
-                        this.Gridd[row, Column] = 'P';
+                        Target.Gridd[row, Column] = 'P';
                     else
-                        this.Gridd[row, Column] = 'A';
+                        Target.Gridd[row, Column] = 'A';
                     return Tuple.Create(row, Column, true);
                     //break;
                 }
@@ -67,10 +67,21 @@ namespace Connect4
             }
         }
 
-        //copy grid from another grid
+        //copy grid from another grid [Need to find out why class objects can't be directly passed]
         public void CopyBoard(Board CopyTo, Board ToCopy)
         {
-            CopyTo.Gridd = ToCopy.Gridd;
+            if (CopyTo.Gridd.Length == ToCopy.Gridd.Length)
+            {
+                for(int x = 0; x < ToCopy.Gridd.GetLength(0); x++)
+                {
+                    for(int y = 0; y < ToCopy.Gridd.GetLength(0); y++)
+                    {
+                        CopyTo.Gridd[x, y] = ToCopy.Gridd[x, y];
+                    }
+                }
+            }
+            else
+                Console.WriteLine("Warning gridds are not of equal dimensions");
         }
 
         //searh a token based off it's location and return how good that token is

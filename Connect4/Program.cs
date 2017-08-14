@@ -13,9 +13,9 @@ namespace Connect4
         static void Main(string[] args)
         {
             //Run the Test Function?
-            Console.Write("Would you like to run the Test function?: Enter Y or N");
-            if (Console.ReadLine() == "Y")
-                Testing();
+         //   Console.Write("Would you like to run the Test function?: Enter Y or N");
+         //   if (Console.ReadLine() == "Y")
+               // Testing();
 
             //get users name and diffculty
             Console.Write("Enter your Name: ");
@@ -25,8 +25,21 @@ namespace Connect4
             //Create and intilized board
             Board Game = new Board(6, 6);
 
-            //test Dictonary
-            Dictionary<int, int> dict = new Dictionary<int, int>();
+            //Example of pass value problem [is passing by reference]
+            /*
+            Board temp = new Board();
+            Board.AddToken(temp, 1, true);
+            
+            Game.DisplayGird();
+            temp.DisplayGird();
+            Board.AddToken(temp, 1, true);
+            Game.DisplayGird();
+            temp.DisplayGird();
+            */
+
+            //test Sorted Dict Tree
+            Objective objective = new Objective();
+            Console.WriteLine(objective.objectiveFun(Game, Int32.Parse(Debth), 6));
             
             
             
@@ -82,7 +95,7 @@ namespace Connect4
                 }
             }
         }
-
+        
         public static void Testing()
         {
             //function used to test various actions
@@ -97,29 +110,29 @@ namespace Connect4
                 case "A":
                     //Test Display and Add token funciton
                     Game.DisplayGird();
-                    Game.AddToken(3,false);
+                    Board.AddToken(Game,3,false);
                     Game.DisplayGird();
                     break;
                 case "B":
                     //Test add token function
-                    Game.AddToken(3, false);
-                    Game.AddToken(2, false);
-                    Game.AddToken(1, false);
-                    Game.AddToken(1, false);
+                    Board.AddToken(Game, 3, false);
+                    Board.AddToken(Game, 2, false);
+                    Board.AddToken(Game, 1, false);
+                    Board.AddToken(Game, 1, false);
                     Game.DisplayGird();
                     break;
                 case "C":
                     //Test Search Points Functuion
-                    Game.AddToken(1, false);
-                    Game.AddToken(1, false);
-                    Game.AddToken(1, false);
-                    Game.AddToken(1, false);
-                    Game.AddToken(2, false);
-                    Game.AddToken(2, false);
-                    Game.AddToken(2, true);
-                    Game.AddToken(3, false);
-                    Game.AddToken(3, true);
-                    Console.WriteLine(Game.SearchPoints(Game.AddToken(4, false), 'P'));
+                    Board.AddToken(Game, 1, false);
+                    Board.AddToken(Game, 1, false);
+                    Board.AddToken(Game, 1, false);
+                    Board.AddToken(Game, 1, false);
+                    Board.AddToken(Game, 2, false);
+                    Board.AddToken(Game, 2, false);
+                    Board.AddToken(Game, 2, true);
+                    Board.AddToken(Game, 3, false);
+                    Board.AddToken(Game, 3, true);
+                    Console.WriteLine(Game.SearchPoints(Board.AddToken(Game, 4, false), 'P'));
                     Game.DisplayGird();
                     break;
                 default:
@@ -129,5 +142,6 @@ namespace Connect4
 
             }
         }
+        
     }
 }
