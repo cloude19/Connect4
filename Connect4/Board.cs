@@ -80,8 +80,8 @@ namespace Connect4
                     }
                 }
             }
-            else
-                Console.WriteLine("Warning gridds are not of equal dimensions");
+           // else
+                //Console.WriteLine("Warning gridds are not of equal dimensions");
         }
 
         //searh a token based off it's location and return how good that token is
@@ -112,7 +112,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Diagonals left downward reached end");
+                  //  Console.WriteLine("Diagonals left downward reached end");
                 }
             }
             //Right upward
@@ -131,7 +131,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Diagonals Right upward reached end");
+                //    Console.WriteLine("Diagonals Right upward reached end");
                 }
             }
             if (pointsFinal < pointsRD)
@@ -156,7 +156,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Diagonals left downward reached end");
+                  //  Console.WriteLine("Diagonals left downward reached end");
                 }
             }
 
@@ -177,7 +177,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Diagonals left Upward reached end");
+                   // Console.WriteLine("Diagonals left Upward reached end");
                 }
             }
             if (pointsFinal < pointsLD)
@@ -201,7 +201,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Vertical up reached end");
+                  //  Console.WriteLine("Vertical up reached end");
                 }
             }
 
@@ -222,7 +222,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Vertical Down reached end");
+                   // Console.WriteLine("Vertical Down reached end");
                 }
             }
             if (pointsFinal < pointsVertical)
@@ -246,7 +246,7 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Horizontal Left reached end");
+                   // Console.WriteLine("Horizontal Left reached end");
                 }
             }
 
@@ -267,13 +267,23 @@ namespace Connect4
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Horizontal Left reached end");
+                  //  Console.WriteLine("Horizontal Left reached end");
                 }
             }
             if (pointsFinal < pointsHorizontal)
                 pointsFinal = pointsHorizontal;
 
             return pointsFinal + 1;
+        }
+
+        //check to see if the board is full
+        public bool Full()
+        {
+            for (int x = 0; x < this.Gridd.Length; x++) {
+                if (this.Gridd[0, x] == '*')
+                    return false;
+                    }
+            return true;
         }
         
     }
